@@ -19,17 +19,11 @@ YYSYNTH_DUMMY_CLASS(UIView_YYAdd)
 @implementation UIView (YYAdd)
 
 - (UIImage *)snapshotImage {
-    UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0);
-    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *snap = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return snap;
+    /// LYHSupport
+    return [self snapshotImageAfterScreenUpdates:YES];
 }
 
 - (UIImage *)snapshotImageAfterScreenUpdates:(BOOL)afterUpdates {
-    if (![self respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
-        return [self snapshotImage];
-    }
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0);
     [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:afterUpdates];
     UIImage *snap = UIGraphicsGetImageFromCurrentImageContext();

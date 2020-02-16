@@ -81,7 +81,8 @@ static const int block_key;
 
 - (void)setBlockForControlEvents:(UIControlEvents)controlEvents
                            block:(void (^)(id sender))block {
-    [self removeAllBlocksForControlEvents:UIControlEventAllEvents];
+    /// LYHSupport
+    [self removeAllBlocksForControlEvents:controlEvents];
     [self addBlockForControlEvents:controlEvents block:block];
 }
 
